@@ -1,8 +1,23 @@
 require 'rubygems'
 require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet-lint/tasks/puppet-lint'
+require 'bundler'
+require 'rake/clean'
+
+Bundler.require(:rake)
 PuppetLint.configuration.send('disable_80chars')
 PuppetLint.configuration.ignore_paths = ["spec/**/*.pp", "pkg/**/*.pp"]
+
+CLEAN.include('spec/fixtures/')
+CLOBBER.include('.tmp', '.librarian')
+
+task :librarian_spec_prep do
+   sh "librarian-puppet install --path spec/fixtures/modules"
+end
+
+task :spec_prep => :librarian_spec_prep
+
+task :default => [:spec]
 
 desc "Validate manifests, templates, and ruby files"
 task :validate do
@@ -15,4 +30,11 @@ task :validate do
   Dir['templates/**/*.erb'].each do |template|
     sh "erb -P -x -T '-' #{template} | ruby -c"
   end
+end
+
+begin
+  require 'kitchen/rake_tasks'
+  Kitchen::RakeTasks.new
+rescue LoadError
+  puts ">>>>> Kitchen gem not loaded, omitting tasks" unless ENV['CI']
 end

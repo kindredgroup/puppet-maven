@@ -38,9 +38,8 @@
 class maven (
   $ensure               = 'present',
   $install_from_package = false,
-  $package_ensure       = present,
-  $package_name         = undef,
-  $symlink              = undef
+  $package              = undef,
+  $package_ensure       = 'present'
 ) inherits ::maven::params {
 
   anchor { '::maven::begin': } ->
