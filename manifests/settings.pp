@@ -1,5 +1,5 @@
 define maven::settings (
-  $directory,
+  $path,
   $source = undef,
   $mirrors = [],
   $profiles = [],
@@ -16,7 +16,7 @@ define maven::settings (
     default => $ensure
   }
 
-  $directory_path = "${directory}/${user}/.m2"
+  $directory_path = "${path}/${user}/.m2"
   $settings_xml_path = "${directory_path}/settings.xml"
 
   file { $directory_path:
