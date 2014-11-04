@@ -19,7 +19,7 @@
         <activeByDefault><%- if profile['active_by_default'] -%>true<%- else -%>false<%- end -%></activeByDefault>
       </activation>
       <properties>
-<%- @profile['properties'].each do |property| -%>
+<%- profile['properties'].each do |property| -%>
         <<%= property['key'] %>><%= property['value'] %></<%= property['key'] %>>
 <%- end -%>
       </properties>
