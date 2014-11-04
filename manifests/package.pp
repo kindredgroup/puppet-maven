@@ -1,6 +1,6 @@
 class maven::package {
 
-  if $install_from_package {
+  if $::maven::install_from_package {
     package { $::maven::package:
       ensure  => $::maven::package_ensure
     }
