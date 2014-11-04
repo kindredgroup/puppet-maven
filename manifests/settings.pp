@@ -45,7 +45,7 @@ define maven::settings (
   }
 
   exec { "validate_settings_xml_${name}":
-    command     => "xmllint --noout ${path}",
+    command     => "xmllint --noout ${settings_xml_path}",
     path        => ['/bin', '/usr/bin'],
     refreshonly => true,
   }
