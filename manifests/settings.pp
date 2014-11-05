@@ -27,11 +27,11 @@ define maven::settings (
   }
 
   file { $settings_xml_path:
-    ensure  => $ensure,
-    owner   => $user,
-    group   => $user,
-    mode    => '0644',
-    notify  => Exec["validate_settings_xml_${name}"]
+    ensure        => $ensure,
+    owner         => $user,
+    group         => $user,
+    mode          => '0644',
+    validate_cmd  => '/usr/bin/env xmllint --noout %'
   }
 
   if $source {
@@ -42,12 +42,6 @@ define maven::settings (
     File[$settings_xml_path] {
       content => template("${module_name}/settings_xml.erb")
     }
-  }
-
-  exec { "validate_settings_xml_${name}":
-    command     => "xmllint --noout ${settings_xml_path}",
-    path        => ['/bin', '/usr/bin'],
-    refreshonly => true,
   }
 
 }
