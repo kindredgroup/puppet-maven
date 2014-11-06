@@ -1,39 +1,42 @@
 # == Class: maven
 #
-# Full description of class maven here.
-#
+# Installs maven from package or tar.gz from upstream
+# 
 # === Parameters
 #
 # Document parameters here.
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+# [*ensure*]
+#   Ensurable
+#   Valid values: present, absent
 #
-# === Variables
+# [*install_from_package*]
+#   If tar.gz should be fetched from upstream, or package installed
+#   Valid values: boolean
 #
-# Here you should define a list of variables that this module would require.
+# [*package*]
+#   If installing from package, name of package(s)
+#   Valid values: string or array of strings
 #
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if
-#   it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should be avoided in favor of class parameters as
-#   of Puppet 2.6.)
+# [*package_ensure*]
+#   If installing from package, <version>, latest, present
+#   If installing from tar.gz, <version>
+#   Valid values: string
 #
 # === Examples
 #
-#  class { 'maven':
-#    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
+#  class { '::maven':
+#    ensure         => present,
+#    package_ensure => '3.1.1'
 #  }
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Johan Lyheden <johan.lyheden@unibet.com>
 #
 # === Copyright
 #
-# Copyright 2014 Your name here, unless otherwise noted.
+# Copyright 2014 North Development AB
 #
 class maven (
   $ensure               = 'present',

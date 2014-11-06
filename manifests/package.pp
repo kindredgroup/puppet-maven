@@ -1,3 +1,7 @@
+# == Class: maven::package
+#
+# Installs the maven package(s)
+#
 class maven::package {
 
   if $::maven::install_from_package {
