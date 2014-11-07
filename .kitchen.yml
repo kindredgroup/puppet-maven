@@ -1,6 +1,6 @@
 ---
 driver:
-  name: vagrant
+  name: docker
 
 provisioner:
   name: puppet_apply
@@ -9,16 +9,10 @@ provisioner:
   require_chef_for_busser: true
 
 platforms:
-  - name: centos-64-x64-vbox4210
-    driver_plugin: vagrant
+  - name: centos-64
     driver_config:
-      box: centos-64-x64-vbox4210
-      box_url: http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210.box
-  - name: ubuntu-server-12042-x64-vbox4210
-    driver_plugin: vagrant
-    driver_config:
-      box: ubuntu-server-12042-x64-vbox4210
-      box_url: http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210.box
+      image: centos:6.4
+      platform: centos
 
 suites:
   - name: default
