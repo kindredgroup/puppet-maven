@@ -12,7 +12,7 @@ provisioner:
 platforms:
   - name: centos6
     driver_config:
-      image: centos:centos6
+      image: jlyheden/kitchen-puppet:centos6
       platform: centos
 
 suites:
