@@ -1,3 +1,4 @@
+package { ['tar', 'gzip]: ensure => present } ->
 class { '::maven':
   package_ensure  => '3.1.1'
 }
