@@ -9,9 +9,9 @@ provisioner:
   require_chef_for_busser: true
 
 platforms:
-  - name: centos-64
+  - name: centos6
     driver_config:
-      image: centos:6.4
+      image: centos:centos6
       platform: centos
 
 suites:
