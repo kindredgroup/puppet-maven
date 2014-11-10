@@ -2,6 +2,7 @@
 driver:
   name: docker
   use_sudo: false
+  socket: <%= ENV.fetch('DOCKER_HOST', 'unix:///var/run/docker.sock') %>
 
 provisioner:
   name: puppet_apply
