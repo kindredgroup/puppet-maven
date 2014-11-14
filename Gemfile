@@ -5,6 +5,7 @@ puppetversion = ENV.key?('PUPPET_VERSION') ? "= #{ENV['PUPPET_VERSION']}" : ['>=
 group :rspec, :kitchen do
   gem 'librarian-puppet'
   gem 'puppet', puppetversion
+	gem 'rspec_junit_formatter'
 end
 
 group :rspec do
@@ -16,8 +17,6 @@ end
 
 group :kitchen do
   gem 'test-kitchen'
-  #gem 'kitchen-vagrant'
   gem 'kitchen-docker'
   gem 'kitchen-puppet', :git => 'https://github.com/neillturner/kitchen-puppet.git'
-  #gem 'vagrant-wrapper'
 end
