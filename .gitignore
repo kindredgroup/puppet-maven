@@ -9,4 +9,4 @@ spec/fixtures/
 .kitchen/
 .kitchen.local.yml
 pkg/
-rspec.xml
+reports/
