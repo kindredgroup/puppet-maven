@@ -3,6 +3,7 @@ driver:
   name: docker
   use_sudo: false
   socket: <%= ENV.fetch('DOCKER_HOST', 'unix:///var/run/docker.sock') %>
+  dns: <%= ENV.fetch('DNS_RESOLVER', '8.8.8.8') %>
 
 provisioner:
   name: puppet_apply

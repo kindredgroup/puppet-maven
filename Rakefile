@@ -36,9 +36,7 @@ task :validate do
   end
 end
 
-begin
-  require 'kitchen/rake_tasks'
-  Kitchen::RakeTasks.new
-rescue LoadError
-  puts ">>>>> Kitchen gem not loaded, omitting tasks" unless ENV['CI']
+desc "Run integration tests"
+task :integration do
+    sh "kitchen test all -c 2"
 end
