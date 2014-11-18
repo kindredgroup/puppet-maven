@@ -38,5 +38,5 @@ end
 
 desc "Run integration tests"
 task :integration do
-    sh "kitchen test all -c 2"
+    sh "kitchen test all --destroy=always"
 end
