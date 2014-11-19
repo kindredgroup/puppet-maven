@@ -11,69 +11,117 @@
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+Simple Puppet module for managing Apache Maven. Tested on osfamily Redhat
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
-
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
+Installs Maven from system package or tar.gz, manages a users settings.xml
 
 ## Setup
 
 ### What maven affects
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
+* By default, maven installation in /opt/apache-maven-VERSION
+* $HOME/.m2/settings.xml for user
 
-### Setup Requirements **OPTIONAL**
+### Setup Requirements
 
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
+Maven is java based and thus requires java to be installed to function.
+When installing from tar.gz the module also requires wget, tar and gzip
+To minimize the dependencies these are expected to be installed outside
+of the maven scope
 
 ### Beginning with maven
 
-The very basic steps needed for a user to get the module up and running.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+```
+puppet module install unibet-maven
+```
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+Install maven from upstream:
+```
+class { '::maven':
+  package_ensure  => '3.1.1'
+}
+```
+
+Install maven from some custom package:
+```
+class { '::maven':
+  install_from_package  => true,
+  package               => 'my-maven-package',
+  package_ensure        => present
+}
+```
+
+Manage settings.xml for user1:
+```
+
+::maven::settings { 'user1':
+  path    => '/home',
+  mirrors => [
+    {
+      id        => 'proxy',
+      name      => 'My proxy',
+      url       => 'http://nexus.example.com/path',
+      mirror_of => '*'
+    }
+  ],
+  profiles  => [
+    {
+      id                => 'default',
+      active_by_default => true
+      properties        => [
+        {
+          key   => 'property1',
+          value => 'value1'
+        }
+      ],
+      repositories  => [
+        {
+          id        => 'my-repo', 
+          url       => 'http://nexus.example.com/my-repo',
+          layout    => 'default',
+          releases  => true,
+          snapshots => false
+        }
+      ],
+      plugin_repositories => [
+        {
+          id        => 'my-plugin-repo',
+          url       => 'http://nexus.example.com/my-plugin-repo',
+          layout    => 'default',
+          releases  => true,
+          snapshots => false
+        }
+      ],
+    },
+  ],
+  servers => [
+    {
+      id  => 'my-repo',
+      username  => 'LOGIN',
+      password  => 'PW'
+    }
+  ],
+}
+```
 
 ## Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+* Classes: maven
+* Defines: maven::settings
+
+See class / define docs and usage
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+Only tested on OS family Redhat
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
-
-## Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
+Pull requests are welcome.
