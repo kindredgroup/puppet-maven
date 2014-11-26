@@ -1,5 +1,7 @@
 # maven
 
+[![Build Status](https://secure.travis-ci.org/unibet/puppet-maven.png)](http://travis-ci.org/unibet/puppet-maven)
+
 #### Table of Contents
 
 1. [Overview](#overview)
