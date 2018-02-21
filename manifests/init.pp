@@ -23,6 +23,10 @@
 #   If installing from tar.gz, <version>
 #   Valid values: string
 #
+# [*wget_url*]
+#   URL to download the package from
+#   Valid values: string
+#
 # === Examples
 #
 #  class { '::maven':
@@ -42,7 +46,8 @@ class maven (
   $ensure               = 'present',
   $install_from_package = false,
   $package              = undef,
-  $package_ensure       = 'present'
+  $package_ensure       = 'present',
+  $wget_url             = $wget_url,
 ) inherits ::maven::params {
 
   anchor { '::maven::begin': } ->

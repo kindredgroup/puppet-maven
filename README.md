@@ -51,6 +51,14 @@ class { '::maven':
 }
 ```
 
+Install maven from upstream using a specific download mirror:
+```
+class { '::maven':
+  package_ensure  => '3.1.1',
+  wget_url        => 'http://apache.rediris.es/maven/maven-3'
+}
+```
+
 Install maven from some custom package:
 ```
 class { '::maven':
