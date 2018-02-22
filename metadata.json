@@ -1,6 +1,6 @@
 {
   "name": "unibet-maven",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "unibet",
   "summary": "Puppet module to manage Apache Maven",
   "license": "Apache 2.0",

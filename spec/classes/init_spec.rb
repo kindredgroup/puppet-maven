@@ -9,7 +9,7 @@ describe 'maven' do
     it { should compile }
     it {
       should contain_exec('install_maven_from_tar_gz').with(
-        :command  => "wget -O - http://www.bizdirusa.com/mirrors/apache/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.tar.gz | tar zxf -"
+        :command  => "wget -O - http://apache.rediris.es/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.tar.gz | tar zxf -"
       )
     }
   end
