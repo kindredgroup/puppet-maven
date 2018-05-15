@@ -47,7 +47,7 @@ class maven (
   $install_from_package = false,
   $package              = undef,
   $package_ensure       = 'present',
-  $wget_url             = $wget_url,
+  $wget_url             = $maven::params::wget_url,
 ) inherits ::maven::params {
 
   anchor { '::maven::begin': } ->
